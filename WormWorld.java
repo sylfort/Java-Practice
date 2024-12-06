@@ -7,12 +7,6 @@ class WormWorld extends World {
     public int WIDTH = 200;
     public int HEIGHT = 200;
     Segment head;
-    
-    public static void main(String[] args) {
-        WormWorld world = new WormWorld();
-        world.bigBang(400, 400, 0.1); // Initialize the canvas with width, height, and tick rate
-    }
-
 
     public WormWorld() {
         this.head = new Segment(this);
@@ -38,6 +32,11 @@ class WormWorld extends World {
         head.draw(g); // Draw the head segment
         return true;
     }
+
+    public static void main(String[] args) {
+        WormWorld world = new WormWorld();
+        world.bigBang(400, 400, 0.1); // Initialize the canvas with width, height, and tick rate
+    }
 }
 
 // one segment of the worm
@@ -55,8 +54,8 @@ class Segment extends Posn {
         this.y = s.y;
     }
 
-    public Segment move(WormWorld wormWorld) {
-        return new Segment(wormWorld);
+    public Segment move(Segment pre) {
+        return new Segment(pre);
     }
 
     public Segment restart(WormWorld w) {
