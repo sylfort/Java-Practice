@@ -17,7 +17,10 @@ public class tangoDb extends JFrame implements ActionListener {
 	static final String SQL = "SELECT * FROM words";
 	
 	static String space = "        ";
-	static JTextArea textArea = new JTextArea(5, 20);
+	static JTextArea textArea1 = new JTextArea(5, 5);
+	static JTextArea textArea2 = new JTextArea(5, 5);
+	static JTextArea textArea3 = new JTextArea(5, 5);
+	static JTextArea textArea4 = new JTextArea(5, 5);
 	JTextField textFieldTango = new JTextField(20);
 	JTextField textFieldFurigana = new JTextField(20);
 	JTextField textFieldEnglish = new JTextField(20);
@@ -32,8 +35,19 @@ public class tangoDb extends JFrame implements ActionListener {
 		setTitle("Tango Client");
 		
 //		getContentPane().setLayout(new GridLayout(2,1));
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		getContentPane().add(scrollPane);
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(1, 4));
+		JScrollPane scrollPane1 = new JScrollPane(textArea1);
+		JScrollPane scrollPane2 = new JScrollPane(textArea2);
+		JScrollPane scrollPane3 = new JScrollPane(textArea3);
+		JScrollPane scrollPane4 = new JScrollPane(textArea4);
+		
+		panel2.add(scrollPane1);
+		panel2.add(scrollPane2);
+		panel2.add(scrollPane3);
+		panel2.add(scrollPane4);
+		getContentPane().add(panel2);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 4));
@@ -89,11 +103,20 @@ public class tangoDb extends JFrame implements ActionListener {
 		}
 	
 	public static void printToTextArea() {
-		textArea.setText("");
-		textArea.append("id" + space +  "単語" + space + space + "ふりがな" + space + "英語" + space + "\n");
+		textArea1.setText("");
+		textArea1.append("id"+ "\n"+ "\n");
+		textArea2.append("単語"+ "\n"+ "\n");
+		textArea3.append("ふりがな"+ "\n"+ "\n");
+		textArea4.append("英語"+ "\n"+ "\n");
+		
+		
 		ArrayList<tangoWord> tangoList = tangoQuery();
 		for (tangoWord tangoWord : tangoList) {
-			textArea.append(tangoWord.id +space + tangoWord.tango + space + tangoWord.furigana + space + tangoWord.english + "\n");
+			textArea1.append(tangoWord.id+ "\n");
+			textArea2.append(tangoWord.tango+ "\n");
+			textArea3.append(tangoWord.furigana+ "\n");
+			textArea4.append(tangoWord.english+ "\n");
+			
 		}
 	}
 	
