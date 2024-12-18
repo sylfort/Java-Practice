@@ -53,7 +53,7 @@ public class tangoDb extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
 		setVisible(true);
-		textArea.append("id" + space +  "単語" + space + "ふりがな" + space + "英語" + space + "\n");
+		
 		printToTextArea();
 	}
 	
@@ -68,9 +68,11 @@ public class tangoDb extends JFrame implements ActionListener {
 	}
 	
 	public static void sendWord(String tango, String furigana, String english) {
-		final String INSERT = "INSERT INTO `words`(`tango`, `furigana`, `english`) VALUES (`";
+		final String INSERT = "INSERT INTO words (tango, furigana, english) VALUES (\"";
 		
-		final String SQL = (INSERT + "`" + tango + "`, `" + furigana + "`, `" + english + "`;");
+		final String SQL = (INSERT + tango + "\", \"" + furigana + "\", \"" + english + "\");");
+		
+		System.out.println(SQL);
 		
 			try(
 					Connection cnct = DriverManager.getConnection(URL, USER, PASS);
@@ -87,9 +89,11 @@ public class tangoDb extends JFrame implements ActionListener {
 		}
 	
 	public static void printToTextArea() {
+		textArea.setText("");
+		textArea.append("id" + space +  "単語" + space + space + "ふりがな" + space + "英語" + space + "\n");
 		ArrayList<tangoWord> tangoList = tangoQuery();
 		for (tangoWord tangoWord : tangoList) {
-			textArea.append(tangoWord.id +space + tangoWord.tango + space + tangoWord.furigana + space + tangoWord.english);
+			textArea.append(tangoWord.id +space + tangoWord.tango + space + tangoWord.furigana + space + tangoWord.english + "\n");
 		}
 	}
 	
