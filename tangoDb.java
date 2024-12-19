@@ -34,7 +34,6 @@ public class tangoDb extends JFrame implements ActionListener {
 	public tangoDb() {
 		setTitle("Tango Client");
 		
-//		getContentPane().setLayout(new GridLayout(2,1));
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new GridLayout(1, 4));
 		JScrollPane scrollPane1 = new JScrollPane(textArea1);
@@ -47,7 +46,6 @@ public class tangoDb extends JFrame implements ActionListener {
 		panel2.add(scrollPane3);
 		panel2.add(scrollPane4);
 		getContentPane().add(panel2);
-		
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 4));
@@ -66,6 +64,21 @@ public class tangoDb extends JFrame implements ActionListener {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(600, 400);
+		float fontSize = 14.0f;
+		Font newFont = new Font("Meiryo", Font.PLAIN, (int) fontSize);
+
+        textArea1.setFont(newFont);
+        textArea2.setFont(newFont);
+        textArea3.setFont(newFont);
+        textArea4.setFont(newFont);
+        textFieldTango.setFont(newFont);
+        textFieldFurigana.setFont(newFont);
+        textFieldEnglish.setFont(newFont);
+        labelTango.setFont(newFont);
+        labelFurigana.setFont(newFont);
+        labelEnglish.setFont(newFont);
+        button1.setFont(newFont);
+		 
 		setVisible(true);
 		
 		printToTextArea();
@@ -77,11 +90,15 @@ public class tangoDb extends JFrame implements ActionListener {
 			sendWord(textFieldTango.getText(), textFieldFurigana.getText(), textFieldEnglish.getText());
 			System.out.println("ボタン１が押されました");
 			printToTextArea();
+			textFieldTango.setText("");
+			textFieldFurigana.setText("");
+			textFieldEnglish.setText("");
 		}
 		
 	}
 	
 	public static void sendWord(String tango, String furigana, String english) {
+		
 		final String INSERT = "INSERT INTO words (tango, furigana, english) VALUES (\"";
 		
 		final String SQL = (INSERT + tango + "\", \"" + furigana + "\", \"" + english + "\");");
@@ -104,6 +121,9 @@ public class tangoDb extends JFrame implements ActionListener {
 	
 	public static void printToTextArea() {
 		textArea1.setText("");
+		textArea2.setText("");
+		textArea3.setText("");
+		textArea4.setText("");
 		textArea1.append("id"+ "\n"+ "\n");
 		textArea2.append("単語"+ "\n"+ "\n");
 		textArea3.append("ふりがな"+ "\n"+ "\n");
